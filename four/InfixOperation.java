@@ -9,16 +9,11 @@ package deriver.four;
  * @author jamesthomas
  */
 public abstract class InfixOperation extends Operation{
+	
 	protected Expression L;
 	protected Expression R;
 	
-	/**
-	 * Doesn't work at all atm
-	 * @param type
-	 * @param L
-	 * @param R
-	 * @return 
-	 */
+	
 	public static InfixOperation getInfixOperation(String type, Expression L, Expression R){
 		String noSpace = type.replaceAll("\\s+","");
 		String s = noSpace.toLowerCase();
@@ -38,5 +33,23 @@ public abstract class InfixOperation extends Operation{
 					+ "but it would signal a fault in the expression charLoop");
 		}
 	}
+	
+	public static final int getPresidence( char c){
+		switch( c ){
+			case '+':
+				return 0;
+			case '-':
+				return 1;
+			case '*':
+				return 2;
+			case '/':
+				return 3;
+			case '^':
+				return 4;
+			default:
+				return 100; //bad coding practice
+		}
+	}
+	
 
 }

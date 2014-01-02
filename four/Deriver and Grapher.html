@@ -1,0 +1,73 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> Deriver and Grapher</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	</head>
+	<body>
+		<div>Hello</div>
+		<div> A short tutorial:
+			<ul>
+				<li>
+					Entering equations:
+					<ul> 
+						<li>
+							You can use +, -, *, /, and ^ as "infix" operations.
+						</li>
+						<li>
+							You can use sin(), cos(), tan(), and ln() as "prefix" operations.
+						</li>
+						<li>
+							Infix operations need parentheses only when "order of operations" dictates, while prefix operations always need them.
+						</li>
+						<li>
+							The two non-composite expressions are "numbers" and "x". X is the only independent variable you can enter.
+						</li>
+						<li>
+							Exponentiation is left-associative, i.e. x^x^x = (x^x)^x.
+						</li>
+					</ul>
+				</li>
+				<li>
+					Adjusting the view
+					<ul> 
+						<li>
+							The "center" fields correspond to the point in the center of the display field, 
+							i.e. the point that the view focuses on.
+						</li>
+						<li>
+							The "scale" fields correspond the the number of pixels per unit on each axis of the graph.
+						</li>
+						<li>
+							I know, this isn't a very intuitive way to do the display...
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<applet code="DeriverFour" width='802' height='560'> I haven't figured this out yet</applet>
+			<script src="http://java.com/js/deployJava.js"></script>
+			<script>
+				var attributes = {codebase:'http://java.sun.com/products/plugin/1.5.0/demos/jfc/Java2D',
+								  code:'DeriverFour.class',
+								  archive:'Java2Demo.jar',
+								  width:710, height:540} ;
+				var parameters = {fontSize:16} ;
+				var version = '1.6' ;
+				deployJava.runApplet(attributes, parameters, version);
+			</script>
+			<p>
+				<object type="application/x-java-applet"
+					name="accessName" width="300" height="200">
+					<param name="code" value="DeriverFour" />
+					<param name="archive" value="Deriver_Four.jar" />
+					<param name="scriptable" value="true" />
+					<param name="mayscript" value="true" />
+				</object>
+			</p>
+		</div>
+	</body>
+</html>

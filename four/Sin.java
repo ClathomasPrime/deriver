@@ -20,4 +20,20 @@ public class Sin extends PrefixOperation{
 	public double value( double x){
 		return Math.sin( param.value( x ) );
 	}
+
+	@Override
+	public String getString() {
+		return "sin(" + param.getString() + ")";
+	}
+	
+	@Override
+	public Operation simplify() {
+		return new Sin( Simplify.mod(this.param) );
+	}
+
+	@Override
+	public Operation derive() {
+		return new Product( Derive.mod(param), 
+							new Expression( new Cos( param ) ) );
+	}
 }

@@ -29,4 +29,14 @@ public abstract class PrefixOperation extends Operation{
 		}
 		
 	}
+	
+	@Override
+	public String getString( int parentPres){
+		return this.getString();
+	}
+	
+	/* @Override
+	public Operation simplify(){
+		return this;
+	} */
 }

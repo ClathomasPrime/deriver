@@ -13,12 +13,12 @@ package deriver.four;
  */
 public class Expression {
 	
-	private Operation operation = new Identity();
+	public Operation operation = new Identity();
 	
 	public Expression( String input ){
 		String noSpace = input.replaceAll("\\s+","");
 		String s = noSpace.toLowerCase();
-		System.out.println(s);
+		//System.out.println(s);
 		
 		if("x".equals(s)){
 			operation= new Identity();
@@ -54,21 +54,8 @@ public class Expression {
 					break;
 				default:
 					if( paramDepth==0 ){
-						switch( character ){
-							case '+':
-								thisScore = 0; break;
-							case '-':
-								thisScore = 1; break;
-							case '*':
-								thisScore = 2; break;
-							case '/':
-								thisScore = 3; break;
-							case '^':
-								thisScore = 4; break;
-							default:
-								continue charLoop;
-						}
-						if(thisScore < minScore){
+						thisScore = InfixOperation.getPresidence(character);
+						if(thisScore <= minScore){
 							breakPoint = i0;
 							minScore = thisScore;
 						}
@@ -77,21 +64,15 @@ public class Expression {
 					break;
 			}
 		}
-		//System.out.println(breakPoint + "    breakPoint");
-		//System.out.println(prefixCheck + "      prefixCheck");
-		//System.out.println(prefix + "|     prefix");
-		//System.out.println(minScore + "      minScore");
 		
 		if( minScore<100 ){ //breakpoint found, should be infix
 			String op = s.substring(breakPoint,breakPoint+1);
-			//System.out.println(op+"   wa");
 			this.operation = InfixOperation.getInfixOperation(
 					op,
 					new Expression(s.substring(0,breakPoint)),
 					new Expression(s.substring(breakPoint+1,s.length()))
 				);
 		} else if(prefixCheck==1) { //either prefix or null parens
-			//System.out.println("identity map");
 			if( "".equals(prefix) ){
 				this.operation = new IdentityMap(
 						new Expression(s.substring(1,s.length()-1 )) 
@@ -102,14 +83,9 @@ public class Expression {
 						new Expression( s.substring( prefix.length()+1,s.length()-1 ) )
 					);
 			}
-		} else { //identity, or value, should have been caught before, so error I guess
+		} else {
 			throw new Error("Got through expression code without being labled as anything");
 		}
-		
-		
-		//operation = new Sum( new Expression(new Identity()), 
-		//		new Expression(new Sin(new Expression(new Identity()))));
-		
 		
 	}
 	public Expression (Operation oper){
@@ -119,4 +95,17 @@ public class Expression {
 	public double value( double x){
 		return operation.value(x);
 	}
+	
+	public String getString( ){
+		return operation.getString(0);
+	}
+	public String getString( int parentPres ){
+		return operation.getString( parentPres );
+	}
+	
+	//Expression-container constants to check for/manipulate
+	public static Expression id = new Expression( new Identity() );
+	public static Expression zero = new Expression( new Number(0) );
+	public static Expression one = new Expression( new Number(1) );
+	
 }

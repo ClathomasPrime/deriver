@@ -18,4 +18,24 @@ public class Number extends Operation{
 	public double value( double x){
 		return value;
 	}
+
+	@Override
+	public String getString() {
+		return Double.toString(value);
+	}
+
+	@Override
+	public String getString(int parentPres) {
+		return getString();
+	}
+
+	@Override
+	public Operation simplify() {
+		return new Number(this.value);
+	}
+
+	@Override
+	public Operation derive() {
+		return new Number( 0 );
+	}
 }

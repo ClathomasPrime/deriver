@@ -19,4 +19,21 @@ public class Tan extends PrefixOperation{
 	public double value( double x){
 		return Math.tan( param.value( x ) );
 	}
+
+	@Override
+	public String getString() {
+		return "tan(" + param.getString() + ")";
+	}
+	
+	@Override
+	public Operation simplify() {
+		return new Tan( Simplify.mod(this.param) );
+	}
+
+	@Override
+	public Operation derive() {
+		return new Quotient( Derive.mod(param), 
+							 new Expression( new Power( new Expression( new Cos ( param ) ),
+														new Expression( new Number( 2) )) )  );
+	}
 }

@@ -19,4 +19,24 @@ public class Identity extends Operation{
 		return x;
 	}
 	
+	@Override
+	public String getString( ){
+		return "x";
+	}
+
+	@Override
+	public String getString(int parentPres) {
+		return "x";
+	}
+
+	@Override
+	public Operation simplify() {
+		return new Identity();
+	}
+
+	@Override
+	public Operation derive() {
+		return new Number(1);
+	}
+	
 }

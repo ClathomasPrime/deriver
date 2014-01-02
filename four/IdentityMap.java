@@ -20,4 +20,24 @@ public class IdentityMap extends Operation{
 	public double value( double x){
 		return expression.value(x);
 	}
+
+	@Override
+	public String getString() {
+		return  expression.getString();
+	}
+
+	@Override
+	public String getString(int parentPres) {
+		return  expression.getString( parentPres);
+	}
+
+	@Override
+	public Operation simplify() {
+		return expression.operation.simplify();
+	}
+
+	@Override
+	public Operation derive() {
+		return expression.operation.derive() ;
+	}
 }

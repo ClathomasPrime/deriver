@@ -19,4 +19,21 @@ public class Cos extends PrefixOperation{
 	public double value( double x){
 		return Math.cos( param.value( x ) );
 	}
+
+	@Override
+	public String getString() {
+		return "cos(" + param.getString() + ")";
+	}
+
+	@Override
+	public Operation simplify() {
+		return new Cos( Simplify.mod(this.param) );
+	}
+
+	@Override
+	public Operation derive() {
+		return new Product( new Expression(new Number(-1)),
+				new Expression(new Product( Derive.mod(param),
+											new Expression( new Sin(param ) ) ) ) );
+	}
 }

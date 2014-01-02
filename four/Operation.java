@@ -10,6 +10,9 @@ package deriver.four;
  */
 public abstract class Operation {
 	
-	public abstract double value(double x);
-	
+	abstract public double value(double x);
+	abstract public String getString();
+	abstract public String getString( int parentPres);
+	abstract public Operation simplify();
+	abstract public Operation derive();
 }
